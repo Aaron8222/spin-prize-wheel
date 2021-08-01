@@ -8,6 +8,8 @@ class Screen:
     LENGTH = 600
     HEIGHT = 600
     BACKGROUND_COLOR = 'blue'
+    WHEEL_LOCATION = (300,300)
+    SPIN_BUTTON_LOCATION = (300,500)
     RIG = 0 # Angle at which you want to land on
    
 
