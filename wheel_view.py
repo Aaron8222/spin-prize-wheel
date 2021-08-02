@@ -31,7 +31,7 @@ class View():
         self._display = pygame.display.set_mode((self._screen.LENGTH,self._screen.HEIGHT))
         self._rot_wheel = pygame.transform.rotate(self.wheel,self._screen._wheel_angle)
         self._spin_button_rect = self.spin_button.get_rect(center=self._screen.SPIN_BUTTON_LOCATION)
-        self._surface = pygame.Surface((2000,2000))
+        # self._surface = pygame.Surface((2500,2500))
 
     def main_draw(self):
         pygame.init()
@@ -41,19 +41,20 @@ class View():
         # icon = pygame.image.load('')
         # pygame.display.set_icon(icon)
 
-        self._surface.fill(self._screen.BACKGROUND_COLOR)
+        self._display.fill(self._screen.BACKGROUND_COLOR)
         self.draw_wheel()
         self.draw_spin_button()
-        surface2 = pygame.transform.smoothscale(self._surface,self._display.get_rect().size)
-        self._display.blit(surface2,(0,0))
+        # surface2 = pygame.transform.smoothscale(self._surface,self._display.get_rect().size)
+        # self._display.blit(surface2,(0,0))
         pygame.display.update()
 
     def draw_wheel(self):
         self._rot_wheel = pygame.transform.rotate(self._rot_wheel,self._screen._wheel_angle)
         wheel_rect = self._rot_wheel.get_rect(center=self._screen.WHEEL_LOCATION)
-
-        self._surface.blit(self._rot_wheel, wheel_rect)
+        self._display.blit(self._rot_wheel, wheel_rect)
+        #self._surface.blit(self._rot_wheel, wheel_rect)
 
     def draw_spin_button(self):
-        self._surface.blit(self.spin_button, self._spin_button_rect)
+        #self._surface.blit(self.spin_button, self._spin_button_rect)
+        self._display.blit(self.spin_button, self._spin_button_rect)
 

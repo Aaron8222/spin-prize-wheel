@@ -5,11 +5,11 @@ Wheel game implementation.
 class Screen:
     """
     """
-    LENGTH = 600
-    HEIGHT = 600
+    LENGTH = 650
+    HEIGHT = 650
     BACKGROUND_COLOR = 'blue'
-    WHEEL_LOCATION = (1000,1000)
-    SPIN_BUTTON_LOCATION = (1000,1500)
+    WHEEL_LOCATION = (325,290)
+    SPIN_BUTTON_LOCATION = (325,480)
     RIG = 0 # Angle at which you want to land on
    
 

@@ -8,9 +8,10 @@ import sys
 def main():
     game = Screen()
 
-    # clock = pygame.time.Clock()
+    clock = pygame.time.Clock()
 
     while game._wheel_angle != -1080:
+        clock.tick(60)
         View(game).main_draw()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -21,7 +22,7 @@ def main():
                 play_click_sound()
                 game._start_game = True
         if game._start_game is True:
-            game._wheel_angle -= 1
+            game._wheel_angle -= 10
 
     game._new_game = True
 
