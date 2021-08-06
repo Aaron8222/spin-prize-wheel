@@ -2,9 +2,10 @@ import pygame
 from wheel_controller import get_mouse_position
 from wheel_view import play_click_sound
 from wheel_view import View
-from wheel_model import Screen, validate_files
+from wheel_model import Screen, divide_final_spin, generate_random_number, validate_files
 import sys
 from wheel_view import load_wheel_image
+from wheel_model import generate_random_number
 
 
 def initial():
@@ -17,7 +18,8 @@ def initial():
 
 def main():
     spin_number = 0
-    while spin_number != 3:
+    target_spin_number = 3
+    while spin_number != target_spin_number:
         View(game).main_draw(rotated_wheel_dict)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -31,6 +33,19 @@ def main():
             game._wheel_angle -= 5
             if game._wheel_angle <= -360:
                 game._wheel_angle = game._wheel_angle + 360
+                if target_spin_number - spin_number == 1:
+                    if game._rig_angle is None:
+                        final_spin = divide_final_spin(generate_random_number())
+                    else:
+                        final_spin = divide_final_spin(game._rig_angle)
+                    print(final_spin)
+                    for increment in final_spin:
+                        game._wheel_angle -= increment
+                        if game._wheel_angle <= -360:
+                            game._wheel_angle = game._wheel_angle + 360
+                            print('here')
+                        print(f'Angle: {game._wheel_angle}, Increment: {increment}')
+                        View(game).main_draw(rotated_wheel_dict)
                 spin_number += 1
 
     game._new_game = True

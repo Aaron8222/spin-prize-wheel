@@ -4,6 +4,7 @@ Wheel game implementation.
 
 import pygame
 import os.path
+import random
 
 class Screen:
     """
@@ -14,7 +15,6 @@ class Screen:
     WHEEL_LOCATION = (325,290)
     SPIN_BUTTON_LOCATION = (325,600)
     ARROW_LOCATION = (325,40)
-    RIG = 0 # Angle at which you want to land on
    
 
 
@@ -25,6 +25,7 @@ class Screen:
         self._light_on = False
         self._rotation_speed = 0
         self._start_game = False
+        self._rig_angle = None
 
 
 def rotate_wheel(original_wheel, wheel_angle):
@@ -47,12 +48,35 @@ def validate_files(original_wheel):
     """
     """
     missing_files = 0
-    for angle in range(0,361,5):
+    for angle in range(0,361,1):
         wheel_path = 'assets/images/rotated_wheels/rotated_wheel_' + str(angle) + '.png'
         if check_file(wheel_path) is False:
             missing_files += 1
             save_file(rotate_wheel(original_wheel, angle), wheel_path)
     print('All files validated. ' + str(missing_files) + ' files were missing!')
+
+def generate_random_number():
+    random.seed()
+    random_number = random.randrange(0,360,5)
+    if random_number in [0,45,90,135,180,225,270,315,360]:
+        random_number = generate_random_number()
+    return random_number
+
+def divide_final_spin(angle, list=[]):
+    if angle < 4:
+        list.append(angle)
+        return list
+    elif angle % 5 != 0:
+        list.append(angle % 5)
+        angle = angle - (angle % 5)
+    else:
+        list.append(5)
+        angle = angle - 5
+    if angle == 0:
+        return list
+    return divide_final_spin(angle, list)
+
+
         
 
 

@@ -35,6 +35,7 @@ class View():
         self._arrow_rect = self.arrow.get_rect(center=self._screen.ARROW_LOCATION)
         # self._surface = pygame.Surface((2500,2500))
 
+
     def main_draw(self, rotated_wheel_dict):
         pygame.init()
         pygame.mixer.init()
@@ -73,7 +74,7 @@ def load_wheel_image():
     """
     """
     rotated_wheel_dict = {}
-    for angle in range(0,361,5):
+    for angle in range(0,361,1):
         wheel_path = 'assets/images/rotated_wheels/rotated_wheel_' + str(angle) + '.PNG'
         rotated_wheel_dict['rotated_wheel_{0}'.format(angle)] = pygame.image.load(wheel_path)
     print('All files loaded!')
