@@ -12,7 +12,8 @@ class Screen:
     HEIGHT = 650
     BACKGROUND_COLOR = 'blue'
     WHEEL_LOCATION = (325,290)
-    SPIN_BUTTON_LOCATION = (325,480)
+    SPIN_BUTTON_LOCATION = (325,600)
+    ARROW_LOCATION = (325,40)
     RIG = 0 # Angle at which you want to land on
    
 
@@ -46,7 +47,7 @@ def validate_files(original_wheel):
     """
     """
     missing_files = 0
-    for angle in range(0,361):
+    for angle in range(0,361,5):
         wheel_path = 'assets/images/rotated_wheels/rotated_wheel_' + str(angle) + '.png'
         if check_file(wheel_path) is False:
             missing_files += 1
