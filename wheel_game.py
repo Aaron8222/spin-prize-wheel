@@ -6,7 +6,7 @@ from wheel_model import Screen, divide_final_spin, generate_random_number, valid
 import sys
 from wheel_view import load_wheel_image
 from wheel_model import generate_random_number
-
+from wheel_controller import get_rig_key
 
 def initial():
     global game
@@ -19,6 +19,9 @@ def initial():
 def main():
     spin_number = 0
     target_spin_number = 3
+    View(game).main_draw(rotated_wheel_dict)
+    if game._rig is True:
+        game._rig_key = get_rig_key()
     while spin_number != target_spin_number:
         View(game).main_draw(rotated_wheel_dict)
         for event in pygame.event.get():
@@ -34,22 +37,17 @@ def main():
             if game._wheel_angle <= -360:
                 game._wheel_angle = game._wheel_angle + 360
                 if target_spin_number - spin_number == 1:
-                    if game._rig_angle is None:
+                    if game._rig is False:
                         final_spin = divide_final_spin(generate_random_number())
                     else:
-                        final_spin = divide_final_spin(game._rig_angle)
-                    print(final_spin)
+                        final_spin = divide_final_spin(generate_random_number(game.RIG_DICT[game._rig_key]))
                     for increment in final_spin:
                         game._wheel_angle -= increment
                         if game._wheel_angle <= -360:
                             game._wheel_angle = game._wheel_angle + 360
-                            print('here')
-                        print(f'Angle: {game._wheel_angle}, Increment: {increment}')
                         View(game).main_draw(rotated_wheel_dict)
                 spin_number += 1
-
     game._new_game = True
-
     if game._new_game == True:
         game._start_game = False
         main()
