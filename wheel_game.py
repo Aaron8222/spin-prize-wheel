@@ -7,6 +7,13 @@ import sys
 from wheel_view import load_wheel_image
 from wheel_model import generate_random_number
 from wheel_controller import get_rig_key
+from wheel_view import play_wheel_click_sound
+
+# TO DO LIST
+# -Clean up rotated images
+# -Fix sounds ie add variety, etc
+# - Unit tests
+# - Comments
 
 def initial():
     global game
@@ -23,14 +30,13 @@ def main():
     if game._rig is True:
         game._rig_key = get_rig_key()
     while spin_number != target_spin_number:
-        View(game).main_draw(rotated_wheel_dict)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if View(game)._spin_button_rect.collidepoint(get_mouse_position()):
-                play_click_sound()
+                play_click_sound(game.BUTTON_CLICK_SOUND)
                 game._start_game = True
         if game._start_game is True:
             game._wheel_angle -= 5
@@ -46,7 +52,10 @@ def main():
                         if game._wheel_angle <= -360:
                             game._wheel_angle = game._wheel_angle + 360
                         View(game).main_draw(rotated_wheel_dict)
+                        # play_wheel_click_sound(game.WHEEL_CLICK_SOUND)
                 spin_number += 1
+        View(game).main_draw(rotated_wheel_dict)
+        # play_wheel_click_sound(game.WHEEL_CLICK_SOUND)
     game._new_game = True
     if game._new_game == True:
         game._start_game = False

@@ -5,11 +5,16 @@ import pygame
 
 
 
-def play_click_sound():
+def play_click_sound(click_sound):
     """
     Plays a click sound
     """
-    click_sound = pygame.mixer.Sound('assets/sounds/click_sound.wav')
+    pygame.mixer.Sound.play(click_sound)
+
+def play_wheel_click_sound(click_sound):
+    """
+    Plays a click sound
+    """
     pygame.mixer.Sound.play(click_sound)
 
 class View():
@@ -54,6 +59,7 @@ class View():
         # self._display.blit(surface2,(0,0))
         pygame.display.update()
 
+
     def draw_wheel(self, rotated_wheel_dict):
         self._rot_wheel = rotated_wheel_dict['rotated_wheel_' + str(360+self._screen._wheel_angle)]
         # wheel_path = 'assets/images/rotated_wheels/rotated_wheel_' + str(360+self._screen._wheel_angle) + '.PNG'
@@ -62,6 +68,8 @@ class View():
         wheel_rect = self._rot_wheel.get_rect(center=self._screen.WHEEL_LOCATION)
         self._display.blit(self._rot_wheel, wheel_rect)
         #self._surface.blit(self._rot_wheel, wheel_rect)
+        # play_wheel_click_sound(self._screen.WHEEL_CLICK_SOUND)
+        
 
     def draw_spin_button(self):
         #self._surface.blit(self.spin_button, self._spin_button_rect)

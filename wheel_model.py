@@ -18,7 +18,9 @@ class Screen:
     RIG_DICT = {'double_points':(359, 316), 'minus_100':(314, 271), \
                 'punishment':(269, 226), 'minus_50':(224, 181), \
                 'plus_100':(179, 136), '1.5_multiplier':(134, 91), \
-                '1.25_multiplier':(89, 46), '?':(44, 1)} 
+                '1.25_multiplier':(89, 46), '?':(44, 1)}
+
+
 
     def  __init__(self):
         """
@@ -27,8 +29,11 @@ class Screen:
         self._light_on = False
         self._rotation_speed = 0
         self._start_game = False
-        self._rig = True
+        self._rig = False
         self._rig_key = None
+        pygame.mixer.init()
+        self.BUTTON_CLICK_SOUND = pygame.mixer.Sound('assets/sounds/click_sound.wav')
+        self.WHEEL_CLICK_SOUND = pygame.mixer.Sound('assets/sounds/wheel_click_sound.wav')
 
 
 def rotate_wheel(original_wheel, wheel_angle):
