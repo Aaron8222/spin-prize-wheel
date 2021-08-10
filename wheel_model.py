@@ -14,11 +14,13 @@ class Screen:
     BACKGROUND_COLOR = 'blue'
     WHEEL_LOCATION = (325,290)
     SPIN_BUTTON_LOCATION = (325,600)
+    STARTUP_IMAGE_LOCATION = (325,325)
     ARROW_LOCATION = (325,40)
     RIG_DICT = {'double_points':(359, 316), 'minus_100':(314, 271), \
                 'punishment':(269, 226), 'minus_50':(224, 181), \
                 'plus_100':(179, 136), '1.5_multiplier':(134, 91), \
                 '1.25_multiplier':(89, 46), '?':(44, 1)}
+    STARTUP_IMAGE_PATH = 'assets/images/startup_final.png'
 
 
 

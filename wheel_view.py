@@ -38,18 +38,23 @@ class View():
         self._rot_wheel = None
         self._spin_button_rect = self.spin_button.get_rect(center=self._screen.SPIN_BUTTON_LOCATION)
         self._arrow_rect = self.arrow.get_rect(center=self._screen.ARROW_LOCATION)
+        self._startup = pygame.image.load(self._screen.STARTUP_IMAGE_PATH)
         # self._surface = pygame.Surface((2500,2500))
 
 
-    def main_draw(self, rotated_wheel_dict):
+    def start_draw(self):
         pygame.init()
         pygame.mixer.init()
         pygame.display.set_caption("Ultimate Spin Wheel")
         clock = pygame.time.Clock()
         clock.tick(60)
-        # icon = pygame.image.load('')
-        # pygame.display.set_icon(icon)
+        icon = pygame.image.load(self._screen.STARTUP_IMAGE_PATH)
+        pygame.display.set_icon(icon)
+        self._display.fill('white')
+        self.draw_startup()
+        pygame.display.update()
 
+    def main_draw(self, rotated_wheel_dict):
         self._display.fill(self._screen.BACKGROUND_COLOR)
         self.draw_wheel(rotated_wheel_dict)
         # self.draw_wheel()
@@ -77,6 +82,10 @@ class View():
 
     def draw_arrow(self):
         self._display.blit(self.arrow, self._arrow_rect)
+
+    def draw_startup(self):
+        startup_rect = self._startup.get_rect(center=self._screen.STARTUP_IMAGE_LOCATION)
+        self._display.blit(self._startup, startup_rect)
 
 def load_wheel_image():
     """

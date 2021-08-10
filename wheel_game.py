@@ -18,15 +18,14 @@ from wheel_view import play_wheel_click_sound
 def initial():
     global game
     game = Screen()
+    View(game).start_draw()
     validate_files(View(game).wheel)
     global rotated_wheel_dict
     rotated_wheel_dict = load_wheel_image()
-    
 
 def main():
     spin_number = 0
     target_spin_number = 3
-    View(game).main_draw(rotated_wheel_dict)
     if game._rig is True:
         game._rig_key = get_rig_key()
     while spin_number != target_spin_number:
