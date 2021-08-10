@@ -34,8 +34,10 @@ class Screen:
         self._rig = False
         self._rig_key = None
         pygame.mixer.init()
-        self.BUTTON_CLICK_SOUND = pygame.mixer.Sound('assets/sounds/click_sound.wav')
-        self.WHEEL_CLICK_SOUND = pygame.mixer.Sound('assets/sounds/wheel_click_sound.wav')
+        self.BUTTON_CLICK_SOUND = \
+            pygame.mixer.Sound('assets/sounds/click_sound.wav')
+        self.WHEEL_CLICK_SOUND = \
+            pygame.mixer.Sound('assets/sounds/wheel_click_sound.wav')
 
 
 def rotate_wheel(original_wheel, wheel_angle):
@@ -59,16 +61,18 @@ def validate_files(original_wheel):
     """
     missing_files = 0
     for angle in range(0,361,1):
-        wheel_path = 'assets/images/rotated_wheels/rotated_wheel_' + str(angle) + '.png'
+        wheel_path = 'assets/images/rotated_wheels/rotated_wheel_' + \
+            str(angle) + '.png'
         if check_file(wheel_path) is False:
             missing_files += 1
             save_file(rotate_wheel(original_wheel, angle), wheel_path)
-    print('All files validated. ' + str(missing_files) + ' files were missing!')
+    print(f'All files validated. {str(missing_files)} files were missing!')
 
 def generate_random_number(range=(360, 0)):
     random.seed()
     random_number = random.randrange(range[1],range[0],1)
-    if random_number in [0,45,90,135,180,225,270,315,360]:
+    if random_number in [0,45,90,135,180,225,270,315,360]: # Reroll if random \
+        # number falls in between prize options. 
         random_number = generate_random_number()
     return random_number
 
