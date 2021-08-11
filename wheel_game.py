@@ -20,14 +20,21 @@ def initial():
         - Screen Class
         - View Class
         - Checks and loads all wheel images
+        - Restructure random generator code (use rig_dict)
     """
     start = time.time()
     global game
+    global final_spin
     global rotated_wheel_dict # Set to global so other functions can use.
     game = Screen()
     View(game).start_draw()
     validate_files(View(game).wheel)
     rotated_wheel_dict = load_wheel_image()
+    if game._rig is False:
+        final_spin = divide_final_spin(generate_random_number())
+    else:
+        final_spin = divide_final_spin(generate_random_number( \
+            game.RIG_DICT[game._rig_key]))
     end = time.time()
     print(f'Successfully initialized in {end - start}')
 
@@ -55,11 +62,7 @@ def main():
                 game._wheel_angle = game._wheel_angle + 360
                 if target_spin_number - spin_number == 1: # Determines how \
                     # much more to spin after 3rd spin.
-                    if game._rig is False:
-                        final_spin = divide_final_spin(generate_random_number())
-                    else:
-                        final_spin = divide_final_spin(generate_random_number( \
-                            game.RIG_DICT[game._rig_key]))
+                    play_wheel_click_sound(game.WHEEL_CLICK_SOUND)
                     for increment in final_spin:
                         game._wheel_angle -= increment
                         if game._wheel_angle <= -360:
@@ -67,10 +70,8 @@ def main():
                         View(game).main_draw(rotated_wheel_dict)
                 spin_number += 1
         View(game).main_draw(rotated_wheel_dict)
-    game._new_game = True
-    if game._new_game == True:
-        game._start_game = False
-        main()
+    game._start_game = False
+    main()
 
 
 

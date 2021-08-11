@@ -72,6 +72,9 @@ class View():
         """
         self._display.fill(self._screen.BACKGROUND_COLOR)
         self.draw_wheel(rotated_wheel_dict)
+        if self._screen._start_game is True:
+            if self._screen._wheel_angle % 30 == 0:
+                play_wheel_click_sound(self._screen.WHEEL_CLICK_SOUND)
         self.draw_spin_button()
         self.draw_arrow()
         pygame.display.update()
@@ -84,7 +87,6 @@ class View():
         wheel_rect = \
             self._rot_wheel.get_rect(center=self._screen.WHEEL_LOCATION)
         self._display.blit(self._rot_wheel, wheel_rect)
-        # play_wheel_click_sound(self._screen.WHEEL_CLICK_SOUND)
         
     def draw_spin_button(self):
         """

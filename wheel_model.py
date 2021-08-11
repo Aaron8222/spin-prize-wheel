@@ -22,8 +22,6 @@ class Screen:
                 '1.25_multiplier':(89, 46), '?':(44, 1)}
     STARTUP_IMAGE_PATH = 'assets/images/startup_final.png'
 
-
-
     def  __init__(self):
         """
         """
@@ -38,6 +36,7 @@ class Screen:
             pygame.mixer.Sound('assets/sounds/click_sound.wav')
         self.WHEEL_CLICK_SOUND = \
             pygame.mixer.Sound('assets/sounds/wheel_click_sound.wav')
+        self._new_game = False
 
 
 def rotate_wheel(original_wheel, wheel_angle):
@@ -70,7 +69,7 @@ def validate_files(original_wheel):
 
 def generate_random_number(range=(360, 0)):
     random.seed()
-    random_number = random.randrange(range[1],range[0],1)
+    random_number = random.randrange(range[1],range[0],5)
     if random_number in [0,45,90,135,180,225,270,315,360]: # Reroll if random \
         # number falls in between prize options. 
         random_number = generate_random_number()
