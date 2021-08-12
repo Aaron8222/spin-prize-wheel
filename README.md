@@ -23,6 +23,6 @@ For rigged landings:
     Random: Leave Blank  
 
 # Credit
-Startup screen made by Keira Deng. Prize wheel click sound provided by
-[All Sounds](https://www.youtube.com/watch?v=FvGBTtaV-6U). All other
-resources were made by [Aaron Huang](https://aaron8222.github.io/).
+Startup screen made by Keira Deng. Prize wheel click sound provided by  
+[All Sounds](https://www.youtube.com/watch?v=FvGBTtaV-6U). All other  
+resources were made by [Aaron Huang](https://aaron8222.github.io/).  
