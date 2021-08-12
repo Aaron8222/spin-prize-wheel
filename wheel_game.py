@@ -20,7 +20,7 @@ def initial():
         - Screen Class
         - View Class
         - Checks and loads all wheel images
-        - Restructure random generator code (use rig_dict)
+        - Add variable config file for executable
     """
     start = time.time()
     global game
@@ -30,11 +30,6 @@ def initial():
     View(game).start_draw()
     validate_files(View(game).wheel)
     rotated_wheel_dict = load_wheel_image()
-    if game._rig is False:
-        final_spin = divide_final_spin(generate_random_number())
-    else:
-        final_spin = divide_final_spin(generate_random_number( \
-            game.RIG_DICT[game._rig_key]))
     end = time.time()
     print(f'Successfully initialized in {end - start}')
 
@@ -44,9 +39,13 @@ def main():
     """
     spin_number = 0
     target_spin_number = 3 # Wheel will spin a minimum of 3 times.
-
     if game._rig is True:
-        game._rig_key = get_rig_key()
+        game._rig_key = get_rig_key(game.RIG_DICT)
+    if game._rig is False:
+        final_spin = divide_final_spin(generate_random_number())
+    else:
+        final_spin = divide_final_spin(generate_random_number( \
+            game.RIG_DICT[game._rig_key]))
     while spin_number != target_spin_number:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

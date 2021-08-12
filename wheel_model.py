@@ -5,6 +5,7 @@ Wheel game implementation.
 import pygame
 import os.path
 import random
+from config import rig
 
 class Screen:
     """
@@ -16,10 +17,10 @@ class Screen:
     SPIN_BUTTON_LOCATION = (325,600)
     STARTUP_IMAGE_LOCATION = (325,325)
     ARROW_LOCATION = (325,40)
-    RIG_DICT = {'double_points':(359, 316), 'minus_100':(314, 271), \
-                'punishment':(269, 226), 'minus_50':(224, 181), \
-                'plus_100':(179, 136), '1.5_multiplier':(134, 91), \
-                '1.25_multiplier':(89, 46), '?':(44, 1)}
+    RIG_DICT = {'double_points':(355, 320), 'minus_100':(310, 275), \
+                'punishment':(265, 230), 'minus_50':(220, 185), \
+                'plus_100':(175, 140), '1.5_multiplier':(130, 95), \
+                '1.25_multiplier':(85, 50), '?':(40, 5), '':(360,0)}
     STARTUP_IMAGE_PATH = 'assets/images/startup_final.png'
 
     def  __init__(self):
@@ -29,7 +30,7 @@ class Screen:
         self._light_on = False
         self._rotation_speed = 0
         self._start_game = False
-        self._rig = False
+        self._rig = rig
         self._rig_key = None
         pygame.mixer.init()
         self.BUTTON_CLICK_SOUND = \
@@ -67,7 +68,7 @@ def validate_files(original_wheel):
             save_file(rotate_wheel(original_wheel, angle), wheel_path)
     print(f'All files validated. {str(missing_files)} files were missing!')
 
-def generate_random_number(range=(360, 0)):
+def generate_random_number(range=(361, 0)):
     random.seed()
     random_number = random.randrange(range[1],range[0],5)
     if random_number in [0,45,90,135,180,225,270,315,360]: # Reroll if random \
