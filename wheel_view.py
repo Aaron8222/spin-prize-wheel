@@ -36,7 +36,8 @@ class View():
     Attributes:
     """
     spin_button = pygame.image.load('assets/images/spin_button_final.png')
-    wheel = pygame.image.load('assets/images/wheel_final.png')
+    blank_wheel = pygame.image.load('assets/images/wheel_blank.png')
+    wheel = pygame.image.load('assets/images/wheel_original.png')
     arrow = pygame.image.load('assets/images/arrow_final.png')
 
     def __init__(self, screen):
@@ -51,6 +52,7 @@ class View():
         self._arrow_rect = \
             self.arrow.get_rect(center=self._screen.ARROW_LOCATION)
         self._startup = pygame.image.load(self._screen.STARTUP_IMAGE_PATH)
+        self._final_wheel = None
 
 
     def start_draw(self):
@@ -83,7 +85,7 @@ class View():
         """
         """
         self._rot_wheel = rotated_wheel_dict['rotated_wheel_' + \
-            str(360+self._screen._wheel_angle)]
+            str(360 + self._screen._wheel_angle)] # Find complement
         wheel_rect = \
             self._rot_wheel.get_rect(center=self._screen.WHEEL_LOCATION)
         self._display.blit(self._rot_wheel, wheel_rect)

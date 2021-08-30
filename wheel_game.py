@@ -2,17 +2,16 @@ import pygame
 from wheel_controller import get_mouse_position, get_rig_key
 from wheel_view import View, play_click_sound, play_wheel_click_sound, \
     load_wheel_image
-from wheel_model import Screen, divide_final_spin, generate_random_number, \
+from wheel_model import Screen, create_new_wheel_files, divide_final_spin, generate_random_number, \
     validate_files
 import sys
 import time
+from config import options
+import shelve
 
 # TO DO LIST
-# - Clean up rotated images
-# - Fix sounds ie add variety, etc
 # - Unit tests
 # - Comments
-# - Restructure (image paths shuold go through the model)
 
 def initial():
     """
@@ -28,7 +27,11 @@ def initial():
     global rotated_wheel_dict # Set to global so other functions can use.
     game = Screen()
     View(game).start_draw()
+    create_new_wheel_files(View(game).blank_wheel, options, game.LENGTH, game.HEIGHT)
     validate_files(View(game).wheel)
+    reference = shelve.open('reference')
+    reference['options'] = options
+    reference.close()
     rotated_wheel_dict = load_wheel_image()
     end = time.time()
     print(f'Successfully initialized in {end - start}')
@@ -41,11 +44,10 @@ def main():
     target_spin_number = 3 # Wheel will spin a minimum of 3 times.
     if game._rig is True:
         game._rig_key = get_rig_key(game.RIG_DICT)
-    if game._rig is False:
-        final_spin = divide_final_spin(generate_random_number())
-    else:
-        final_spin = divide_final_spin(generate_random_number( \
+        final_spin = divide_final_spin((360 - abs(game._wheel_angle)) + generate_random_number( \
             game.RIG_DICT[game._rig_key]))
+    else:
+        final_spin = divide_final_spin(generate_random_number())
     while spin_number != target_spin_number:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
