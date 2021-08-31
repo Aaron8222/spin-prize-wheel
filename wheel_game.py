@@ -3,7 +3,7 @@ from wheel_controller import get_mouse_position, get_rig_key
 from wheel_view import View, play_click_sound, play_wheel_click_sound, \
     load_wheel_image
 from wheel_model import Screen, create_new_wheel_files, divide_final_spin, generate_random_number, \
-    validate_files
+    validate_files, create_options_to_rig_key_dict
 import sys
 import time
 from config import options
@@ -43,7 +43,8 @@ def main():
     spin_number = 0
     target_spin_number = 3 # Wheel will spin a minimum of 3 times.
     if game._rig is True:
-        game._rig_key = get_rig_key(game.RIG_DICT)
+        create_options_to_rig_key_dict(options, game.OPTIONS_DICT)
+        game._rig_key = get_rig_key(options, game.OPTIONS_DICT)
         final_spin = divide_final_spin((360 - abs(game._wheel_angle)) + generate_random_number( \
             game.RIG_DICT[game._rig_key]))
     else:

@@ -19,10 +19,11 @@ class Screen:
     SPIN_BUTTON_LOCATION = (325,600)
     STARTUP_IMAGE_LOCATION = (325,325)
     ARROW_LOCATION = (325,40)
-    RIG_DICT = {'option_1': (0, 45), 'option_2': (45, 90), \
-                'option_3': (90, 135), 'option_4': (135, 180), \
-                'option_5': (180, 225), 'option_6': (225, 270), \
-                'option_7': (270, 315), 'option_8': (315, 360), '': (0,360)}
+
+    RIG_DICT = {'option_1': (270,315), 'option_2': (315,360), \
+            'option_3': (0,45), 'option_4': (135,180), \
+            'option_5': (180,225), 'option_6': (225,270), \
+            'option_7': (270,315), 'option_8': (315, 360), '': (0,360)}
     STARTUP_IMAGE_PATH = 'assets/images/startup_final.png'
     OPTIONS_DICT = {}
 
@@ -152,6 +153,12 @@ def find_text_location():
     
 def find_midpoint(coord1, coord2):
     return ((coord1[0]+coord2[0])/2, (coord1[1]+coord2[1])/2)
+
+def create_options_to_rig_key_dict(options, option_dict):
+    for count, option in enumerate(options):
+        option_dict[option] = f'option_{count+1}'
+        
+
 
 
         
