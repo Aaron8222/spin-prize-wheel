@@ -7,4 +7,4 @@ rig = True
 #   - There should be 8 prize options 
 #   - Each option should be within quotes
 #   - Commas should separate different options
-options = ['Double Points','Triple Points','3','4','5','6','7','8']
+options = ['Buffalo','Habanero','Both','Buffalo','Habanero','Both','7','8']
